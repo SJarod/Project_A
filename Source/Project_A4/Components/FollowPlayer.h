@@ -12,7 +12,7 @@ class PROJECT_A4_API UFollowPlayer : public UActorComponent
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	class ACharacter* player;
 
 protected:
