@@ -14,7 +14,7 @@ class PROJECT_A4_API UShooter : public UActorComponent
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	class AActor* projectile;
+	TSubclassOf<class AActor> projectile;
 
 protected:
 	// Called when the game starts
