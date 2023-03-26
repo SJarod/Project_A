@@ -47,23 +47,6 @@ void ATPCharacterBase::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ATPCharacterBase::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ATPCharacterBase::MoveRight);
-
-	// handle touch devices
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &ATPCharacterBase::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &ATPCharacterBase::TouchStopped);
-
-	// VR headset functionality
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &ATPCharacterBase::OnResetVR);
-}
-
-void ATPCharacterBase::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		Jump();
-}
-
-void ATPCharacterBase::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		StopJumping();
 }
 
 void ATPCharacterBase::MoveForward(float Value)
