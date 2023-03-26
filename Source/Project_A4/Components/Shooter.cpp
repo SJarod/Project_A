@@ -5,6 +5,7 @@
 #include "../DebugHelpers.h"
 
 #include "Components/InputComponent.h"
+#include "../Actors/ProjectileBase.h"
 
 // Sets default values for this component's properties
 UShooter::UShooter()
@@ -12,6 +13,7 @@ UShooter::UShooter()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
+	owner = GetOwner();
 }
 
 void UShooter::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -37,7 +39,8 @@ void UShooter::Shoot()
 	DebugLogRed(1.f, TEXT("shooting"));
 
 	lastShotTime = GetWorld()->GetTimeSeconds();
-	// spawn projectile
+
+	GetWorld()->SpawnActor<AActor>(projectile, owner->GetActorLocation(), owner->GetActorRotation());
 }
 
 // Called when the game starts
@@ -50,7 +53,6 @@ void UShooter::BeginPlay()
 
 
 	// binding shoot action to input component of owner
-	AActor* owner = GetOwner();
 	if (!owner || !owner->InputComponent)
 		return;
 

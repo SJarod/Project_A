@@ -12,6 +12,8 @@ class PROJECT_A4_API UShooter : public UActorComponent
 	GENERATED_BODY()
 
 private:
+	AActor* owner;
+
 	bool bShooting = false;
 	// time when shot was fired
 	float lastShotTime = 0.f;
@@ -21,7 +23,7 @@ private:
 	float shootingRate = 0.1f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	TSubclassOf<class AActor> projectile;
+	TSubclassOf<class AProjectileBase> projectile;
 
 	void StartShooting();
 	void StopShooting();

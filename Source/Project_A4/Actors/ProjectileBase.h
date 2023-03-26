@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "../Utils.h"
+
 #include "ProjectileBase.generated.h"
 
 UCLASS()
@@ -18,9 +20,15 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	class UStaticMesh* mesh;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	class UProjectileMovementComponent* projectileComp;
+
 	// projectile direction
 	FVector dir = FVector::ForwardVector;
-	float speed = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float lifeTime = 5.f;
+	float birthTime = 0.f;
 	
 public:	
 	// Sets default values for this actor's properties
