@@ -18,6 +18,8 @@ private:
 	// time when shot was fired
 	float lastShotTime = 0.f;
 
+	FVector aimDir = FVector::ForwardVector;
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float shootingRate = 0.1f;

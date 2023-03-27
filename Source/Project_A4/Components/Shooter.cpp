@@ -2,6 +2,9 @@
 
 #include "Shooter.h"
 
+#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Runtime/Engine/Classes/GameFramework/PlayerController.h"
+
 #include "../DebugHelpers.h"
 #include "../Utils.h"
 
@@ -20,6 +23,15 @@ UShooter::UShooter()
 void UShooter::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	// update aim direction
+	FVector2D mousePos;
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetMousePosition(mousePos.X, mousePos.Y);
+	FVector2D size = GEngine->GameViewport->Viewport->GetSizeXY();
+	FVector2D center = size * 0.5f;
+	FVector2D dir = mousePos - center;
+	dir.Normalize();
+	aimDir = FVector(-dir.Y, dir.X, 0.f);
 
 	if (bShooting && GetTimeSince(lastShotTime) >= shootingRate)
 		Shoot();
@@ -44,7 +56,7 @@ void UShooter::Shoot()
 	AActor* shot = GetWorld()->SpawnActor<AActor>(projectile, owner->GetActorLocation(), owner->GetActorRotation());
 	FVector speed = owner->GetVelocity();
 	speed.Normalize();
-	Cast<AProjectileBase>(shot)->Launch(FVector::ForwardVector, speed);
+	Cast<AProjectileBase>(shot)->Launch(aimDir, speed);
 }
 
 // Called when the game starts
