@@ -13,9 +13,9 @@ AProjectileBase::AProjectileBase()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	collider = CreateComponent(USphereComponent);
-	projectileComp = CreateComponent(UProjectileMovementComponent);
-	projectileComp->ProjectileGravityScale = 0.f;
+	Collider = CreateComponent(USphereComponent);
+	ProjectileMovement = CreateComponent(UProjectileMovementComponent);
+	ProjectileMovement->ProjectileGravityScale = 0.f;
 }
 
 // Called when the game starts or when spawned
@@ -26,8 +26,8 @@ void AProjectileBase::BeginPlay()
 	birthTime = GetTime();
 
 	// firing
-	projectileComp->SetActive(true);
-	projectileComp->Velocity = dir * projectileComp->InitialSpeed;
+	ProjectileMovement->SetActive(true);
+	ProjectileMovement->Velocity = dir * ProjectileMovement->InitialSpeed;
 }
 
 // Called every frame

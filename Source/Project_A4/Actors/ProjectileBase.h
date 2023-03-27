@@ -13,13 +13,13 @@ class PROJECT_A4_API AProjectileBase : public AActor
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	class USphereComponent* collider;
+	class USphereComponent* Collider;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	class UStaticMesh* mesh;
+	class UStaticMesh* StaticMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	class UProjectileMovementComponent* projectileComp;
+	class UProjectileMovementComponent* ProjectileMovement;
 
 	// projectile direction
 	FVector dir = FVector::ForwardVector;

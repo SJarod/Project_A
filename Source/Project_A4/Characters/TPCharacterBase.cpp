@@ -9,6 +9,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 
+#include "../Utils.h"
 #include "../Components/Shooter.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -32,7 +33,7 @@ ATPCharacterBase::ATPCharacterBase()
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.2f;
 
-	shooterComp = CreateDefaultSubobject<UShooter>(TEXT("Shooter Component"));
+	Shooter = CreateComponent(UShooter);
 }
 
 //////////////////////////////////////////////////////////////////////////

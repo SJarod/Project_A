@@ -13,7 +13,7 @@ class ATPCharacterBase : public ACharacter
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
-	class UShooter* shooterComp;
+	class UShooter* Shooter;
 
 protected:
 	/** Resets HMD orientation in VR. */
