@@ -3,6 +3,7 @@
 #include "Shooter.h"
 
 #include "../DebugHelpers.h"
+#include "../Utils.h"
 
 #include "Components/InputComponent.h"
 #include "../Actors/ProjectileBase.h"
@@ -20,7 +21,7 @@ void UShooter::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if (bShooting && GetWorld()->GetTimeSeconds() - lastShotTime >= shootingRate)
+	if (bShooting && GetTimeSince(lastShotTime) >= shootingRate)
 		Shoot();
 }
 
@@ -38,7 +39,7 @@ void UShooter::Shoot()
 {
 	DebugLogRed(1.f, TEXT("shooting"));
 
-	lastShotTime = GetWorld()->GetTimeSeconds();
+	lastShotTime = GetTime();
 
 	GetWorld()->SpawnActor<AActor>(projectile, owner->GetActorLocation(), owner->GetActorRotation());
 }

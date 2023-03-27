@@ -12,7 +12,7 @@ class ATPCharacterBase : public ACharacter
 	GENERATED_BODY()
 
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	class UShooter* shooterComp;
 
 protected:

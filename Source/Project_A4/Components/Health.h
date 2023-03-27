@@ -12,6 +12,10 @@ class PROJECT_A4_API UHealth : public UActorComponent
 {
 	GENERATED_BODY()
 
+private:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	float health = 100.f;
+
 public:	
 	// Sets default values for this component's properties
 	UHealth();
