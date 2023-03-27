@@ -25,13 +25,15 @@ void UShooter::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// update aim direction
-	FVector2D mousePos;
-	UGameplayStatics::GetPlayerController(GetWorld(), 0)->GetMousePosition(mousePos.X, mousePos.Y);
-	FVector2D size = GEngine->GameViewport->Viewport->GetSizeXY();
-	FVector2D center = size * 0.5f;
-	FVector2D dir = mousePos - center;
-	dir.Normalize();
-	aimDir = FVector(-dir.Y, dir.X, 0.f);
+	FVector loc, dir;
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->DeprojectMousePositionToWorld(loc, dir);
+
+	FHitResult hit;
+	GetWorld()->LineTraceSingleByChannel(hit, loc, loc + dir * 9999.f, ECollisionChannel::ECC_Visibility);
+
+	aimDir = hit.Location - owner->GetActorLocation();
+	aimDir.Normalize();
+	aimDir.Z = 0.f;
 
 	if (bShooting && GetTimeSince(lastShotTime) >= shootingRate)
 		Shoot();
