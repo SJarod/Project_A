@@ -21,9 +21,6 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	class UProjectileMovementComponent* ProjectileMovement;
 
-	// projectile direction
-	FVector dir = FVector::ForwardVector;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float lifeTime = 5.f;
 	float birthTime = 0.f;
@@ -40,4 +37,11 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	/**
+	 * Launch projectile.
+	 * 
+	 * @param dir should be normalized
+	 * @param v0 is the initial speed
+	 */
+	void Launch(const FVector& dir, const FVector& v0);
 };

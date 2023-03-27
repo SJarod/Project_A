@@ -37,11 +37,14 @@ void UShooter::StopShooting()
 
 void UShooter::Shoot()
 {
-	DebugLogRed(1.f, TEXT("shooting"));
+	//DebugLogRed(1.f, TEXT("shooting"));
 
 	lastShotTime = GetTime();
 
-	GetWorld()->SpawnActor<AActor>(projectile, owner->GetActorLocation(), owner->GetActorRotation());
+	AActor* shot = GetWorld()->SpawnActor<AActor>(projectile, owner->GetActorLocation(), owner->GetActorRotation());
+	FVector speed = owner->GetVelocity();
+	speed.Normalize();
+	Cast<AProjectileBase>(shot)->Launch(FVector::ForwardVector, speed);
 }
 
 // Called when the game starts

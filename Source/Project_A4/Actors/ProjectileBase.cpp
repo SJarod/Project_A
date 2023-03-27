@@ -24,10 +24,6 @@ void AProjectileBase::BeginPlay()
 	Super::BeginPlay();
 	
 	birthTime = GetTime();
-
-	// firing
-	ProjectileMovement->SetActive(true);
-	ProjectileMovement->Velocity = dir * ProjectileMovement->InitialSpeed;
 }
 
 // Called every frame
@@ -37,4 +33,9 @@ void AProjectileBase::Tick(float DeltaTime)
 
 	if (GetTimeSince(birthTime) > lifeTime)
 		Destroy();
+}
+
+void AProjectileBase::Launch(const FVector& dir, const FVector& v0)
+{
+	ProjectileMovement->Velocity = (dir + v0) * ProjectileMovement->InitialSpeed;
 }
